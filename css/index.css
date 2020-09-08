@@ -1,0 +1,225 @@
+
+body *, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    color: black;
+    font-family: sans-serif;
+}
+.container .firezard{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .firezard form{
+    width: 300px;
+}
+.container .firezard form input{
+    height: 20px;
+    width: 300px;
+}
+.container .firezard form input[type=text], .container .firezard form input[type=password]{
+    margin-top: 10px;
+    padding: 20px;
+    font-size: 1.3em;
+    font-family: sans-serif;
+}
+.container .firezard form input[type=submit], .container .firezard form .gold{
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 1.3em;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 1px rgb(66, 66, 66);
+    background-color: rgba(4, 25, 56, 0.801);
+    margin-top: 25px;
+    height: 50px;
+    width: 300px;
+}
+.container .firezard form .gold{
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(128, 148, 16, 0.801);
+}
+.container .firezard form input[type=submit]:hover {
+    cursor: pointer;
+    box-shadow: inset 1px 1px 5px white;
+}
+.error{
+    color: rgba(32,32,32);
+    background-color: rgb(252, 146, 146);
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+}
+.main{
+    width: 80%;
+    height: 100vh;
+    background-color: rgb(209, 209, 209);
+    margin: 0 auto;
+}
+h2{
+    text-align: center;
+    padding: 5px;
+    color: rgba(2, 18, 43, 0.801);
+    text-shadow: 1px 3px 3px rgba(2, 11, 27, 0.801);
+}
+h3{
+    text-align: center;
+    padding: 5px;
+    color: rgba(2, 18, 43, 0.801);
+    text-shadow: 1px 3px 3px rgba(2, 11, 27, 0.801);
+}
+.botoes{
+    display: flex;
+}
+.botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: calc(100%/3);
+    border: 1px solid rgba(14, 45, 92, 0.801);
+    background-color: rgba(4, 25, 56, 0.801);
+    border-radius: 10px;
+    font-size: 1.2em;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 3px 3px black;
+}
+.botao:hover{
+    cursor: pointer;
+    text-shadow: 1px 2px 1px black;
+    background-color: rgba(2, 18, 43, 0.801);
+} 
+.gaming{
+    display: flex;
+    justify-content: space-around;
+}
+.gaming .left-side, .gaming .right-side{
+    width: 428px;
+    height: 330px;
+}
+.gaming .left-side{
+    border: 1px solid black;
+    background-image: url('../img/duel1.png');
+    display: flex;
+    flex-wrap: wrap;
+}
+.gaming .left-side .side-up, .gaming .left-side .side-down{
+    width: 100%;
+    height: 155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gaming .left-side .side-up p, .gaming .left-side .side-down p{
+    color: white;
+    font-size: 2em;
+    font-family: sans-serif;
+    text-shadow: 3px 3px 3px black;
+    background-color: rgba(236, 115, 115, 0.74);
+    padding: 8px;
+    border-radius: 50px;
+}
+.gaming .left-side .side-up p:hover, .gaming .left-side .side-down p:hover{
+    background-color: rgba(20, 192, 20, 0.74);
+    cursor: pointer;
+} 
+.gaming .right-side .box-winner{
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    Color: rgba(2, 18, 43, 0.801);
+    font-size: 2.2em;
+}
+.gaming-next{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.versus{
+    padding: 10px;
+    color: rgba(148, 24, 24, 0.74);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.gaming-next .next-player{
+    width: calc(100%/3);
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    background-color: rgb(145, 145, 145);
+    padding: 10px;
+    border-radius: 200px;
+}
+
+.check-database{
+    display: flex;
+    padding: 10px;
+}
+.versus{
+    padding: 10px;
+    color: rgba(148, 24, 24, 0.74);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.check-database .past-c:nth-child(1){
+    font-family: arial;
+} 
+.check-database .past-c:nth-child(3){
+    font-family: arial;
+}
+.check-database .past-c{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: calc(100%/4);
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    background-color: rgba(9, 99, 105, 0.747);
+    padding: 10px;
+    border-radius: 200px;
+}
+.check-database .winner-past{
+    background-color: rgba(24, 194, 52, 0.726);
+}
+.event-click{
+    width: 80%;
+    height: 100%;
+    background-color: rgba(32, 32, 32, 0.692);
+    z-index:999;
+    top:0;
+    position: absolute;
+    margin: 0 auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.event-click .bloco-signup{
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+    width: 400px;
+    padding: 10px;
+}
+.event-click .bloco-signup input, .event-click .bloco-signup button{
+    width: 100%;
+    padding: 15px;
+    display: block;
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+.event-click .bloco-signup button{
+    border: 1px solid grey;
+}
+.event-click .bloco-signup button:hover{
+    cursor: pointer;
+    background-color: rgba(4, 25, 56, 0.801);
+    border: 1px solid black;
+    color: white;
+}
