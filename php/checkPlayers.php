@@ -1,13 +1,13 @@
-
+<?php 
+require "conexao.php";
+session_start();
+$sql = "select * from Fighter where datee='".$_SESSION['dateHoje']."'";
+$resultado = mysqli_query($conn,$sql);
+while($players = mysqli_fetch_array($resultado)){
+?>
     <div class="past-c">
-        NextPlayer
+        <?=$players['name']?>
     </div>
-    <div class="past-c">
-        X
-    </div>
-    <div class="past-c">
-        NextPlayer
-    </div>
-    <div class="past-c">
-        WinnerPlayer
-    </div>
+<?php 
+}
+?>

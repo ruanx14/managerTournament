@@ -56,6 +56,14 @@ body *, body{
     color: white;
     font-weight: bold;
 }
+.disabled{
+    border: 1px solid white !important;
+    background-color: rgba(131, 131, 133, 0.801) !important;
+}
+.disabled:hover{
+    cursor: default !important;
+    background-color: rgba(77, 77, 77, 0.61)!important; 
+}
 .main{
     width: 80%;
     height: 100vh;
@@ -161,6 +169,7 @@ h3{
 
 .check-database{
     display: flex;
+    flex-wrap: wrap;
     padding: 10px;
 }
 .versus{
@@ -184,6 +193,7 @@ h3{
     background-color: rgba(9, 99, 105, 0.747);
     padding: 10px;
     border-radius: 200px;
+    margin-top: 5px;
 }
 .check-database .winner-past{
     background-color: rgba(24, 194, 52, 0.726);

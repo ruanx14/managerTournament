@@ -4,6 +4,9 @@
     <?php 
     session_start();
     require 'php/conexao.php';
+
+    $dateHoje =  date("Y-m-d");
+
     if(isset($_GET['logout'])){
         unset($_SESSION['admin']);
         unset($_SESSION['round']);
@@ -17,9 +20,23 @@
             $_SESSION['msg'] = "<p class='error'>Wrong person!</p>";
         }else{
             $_SESSION['admin'] = "goldraven";
+            $_SESSION['dateHoje'] = $dateHoje;
+            $result = mysqli_query($conn,"select * from Round where datee='".$dateHoje."'");
+            if(mysqli_num_rows($result)>0){
+                $dadosBanco = mysqli_fetch_array($result);
+                $_SESSION['round'] = $dadosBanco['round'];
+            }else{
+                $inserirRound = 'insert into Round(round, estado, datee) values(
+                1,
+                "Interminado",
+                "'.$_SESSION['dateHoje'].'"
+                )';
+                mysqli_query($conn,$inserirRound);
+                $_SESSION['round'] = 1;
+            }
         }
     }
-
+   
     //dia que eu to
     //round que eu to
 
@@ -54,9 +71,19 @@
     ?>
     <main class="main">
         <div class="botoes">
-            <div class="botao inicio">New Player</div>
-            <div class="botao inicio">New Battle</div>
-            <div class="botao inicio">Next Round</div>
+            <?php 
+            if($_SESSION['round']==1){
+            ?>
+                <div class="botao inicio">New Player</div>
+                <div class="botao inicio">New Battle</div>
+                <div class="botao inicio">Next Round</div>
+            <?php 
+            }else{
+            ?>
+                <div class="botao disabled">New Player</div>
+                <div class="botao disabled">New Battle</div>
+                <div class="botao inicio">Next Round</div>
+            <?php } ?>
         </div>
         <h2>Current Fight</h2>
         <div class="gaming">
@@ -105,15 +132,15 @@
         </div>
         <section class="event-click">
             <div class="bloco-signup">
-                <input type="text" placeholder="Player Name">
-                <input type="text" placeholder="Player Name">
-                <button>Done</button>
+                <input type="text" class="btnData" name="playerOne" placeholder="Player Name">
+                <input type="text" class="btnData" name="playerTwo" placeholder="Player Name">
+                <button type="submit">Done</button>
             </div>
         </section>
         <section class="event-click">
             <div class="bloco-signup">
-                <input type="text" placeholder="Player Name">
-                <button>Done</button>
+                <input type="text" class="btnData" name="onePlayer" placeholder="Player Name">
+                <button type="submit">Done</button>
             </div>
         </section>
         
