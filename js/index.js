@@ -6,6 +6,8 @@ dataPlayer = document.querySelectorAll(".btnData");
 botoesFighters = document.querySelectorAll(".btnFighter");
 nextPlayer = document.querySelectorAll('.next-player');
 boxWinner = document.querySelector('.box-winner');
+nextRound = document.querySelectorAll('.bloco-signup')[2];
+btnRound = document.querySelector(".btnRound");
 
 if(botoesUp[0]!=undefined && botoesUp[1]!=undefined){
     botoesUp[0].onclick = function(){
@@ -13,8 +15,48 @@ if(botoesUp[0]!=undefined && botoesUp[1]!=undefined){
     } 
     botoesUp[1].onclick = function(){
         telaCadastrar[0].style.display = "flex";
-    } 
+    }
 }
+
+btnRound.onclick = function(){
+    telaCadastrar[2].style.display = "flex";
+    xmr = new XMLHttpRequest();
+    xmr.onreadystatechange = function(){
+        if(xmr.readyState==1){
+            nextRound.innerHTML = "preparing next round...";
+        }
+        if(xmr.readyState==2){
+            nextRound.innerHTML = "almost there...";
+        }
+        if(xmr.readyState==3){
+            nextRound.innerHTML = "more...";
+        }
+        if(xmr.readyState==4){
+                nextRound.innerHTML = xmr.responseText;
+                var cont = 5;
+                var timer = setInterval(() => {
+                    nextRound.childNodes[5].innerHTML = cont;
+                    cont--;
+                    if(cont==0){
+                        clearInterval(timer);
+                    }
+                }, 1000); 
+                if(nextRound.childNodes[1].innerHTML=="The all battles are not done."){
+                    setTimeout(function(){
+                        telaCadastrar[2].style.display = "none";
+                        nextRound.childNodes[5].innerHTML = 5;
+                    },6000);
+                }else{
+                    setTimeout(function(){
+                        window.location.reload();
+                    },6000);
+                } 
+            }
+    }
+    xmr.open('GET','php/nextRound.php');
+    xmr.send();
+} 
+
 
 telaCadastrar.forEach(function(tela, index, listObj){
     tela.onclick = function(e){
@@ -23,6 +65,7 @@ telaCadastrar.forEach(function(tela, index, listObj){
         }
     }
 });
+
 botoesDown[0].onclick = function(){
     xmr = new XMLHttpRequest();
     xmr.onreadystatechange = function(){
@@ -77,6 +120,7 @@ bdBotoes[0].onclick = function(){
     dataPlayer[0].value = "";
     dataPlayer[1].value = "";
     telaCadastrar[0].style.display = "none";
+    window.location.reload();
     }   
 }   
 
@@ -91,7 +135,7 @@ if(botoesFighters[0].id!='dead'){
                     dados = JSON.parse(xmr.responseText);
                     var cont = 5;
                     var timer = setInterval(() => {
-                        boxWinner.innerHTML = "<p>The winner of this battle is:</p><p>"+elem.innerHTML+"</p><p>preparing next battle...<br>"+cont+"</p>";
+                        boxWinner.innerHTML = "<p>The winner of this battle is:</p><p>"+elem.innerHTML+"</p><p>preparing next battle...<br>"+cont+"<br>"+"<section class='loader'><main class='loader-corpo'><article class='pop-cicle'></article><div class='sorvete'></div></main></section></p>";
                         cont--;
                         if(cont==0){
                             clearInterval(timer);
@@ -122,6 +166,8 @@ if(botoesFighters[0].id!='dead'){
             xmr.send();
         }
     });
+}else{
+    //alert("oi");
 }
 
 

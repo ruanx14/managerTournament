@@ -21,7 +21,7 @@
         }else{
             $_SESSION['admin'] = "goldraven";
             $_SESSION['dateHoje'] = $dateHoje;
-            $result = mysqli_query($conn,"select * from Round where datee='".$dateHoje."'");
+            $result = mysqli_query($conn,"select * from Round where datee='".$dateHoje."' order by idRound desc");
             if(mysqli_num_rows($result)>0){
                 $dadosBanco = mysqli_fetch_array($result);
                 $_SESSION['round'] = $dadosBanco['round'];
@@ -34,22 +34,21 @@
                 mysqli_query($conn,$inserirRound);
                 $_SESSION['round'] = 1;
             }
-
-           
         }
     }
-    $hasBattle = mysqli_query($conn,"select * from Fight where alreadyFight='not' and round='".$_SESSION['round']."' and datee='".$_SESSION['dateHoje']."'");
-    if(mysqli_num_rows($hasBattle)>0){
-        $dados = mysqli_fetch_array($hasBattle);
-        $py1 = $dados['namePlayerOne'];
-        $py2 = $dados['namePlayerTwo'];
-        $idLuta = $dados['idFight'];
-    }else{
-        $py1 = "waiting player 1...";
-        $py2 = "waiting player 2...";
-        $idLuta = 'dead';
+    if(isset($_SESSION['round'])){
+        $hasBattle = mysqli_query($conn,"select * from Fight where alreadyFight='not' and round='".$_SESSION['round']."' and datee='".$_SESSION['dateHoje']."'");
+        if(mysqli_num_rows($hasBattle)>0){
+            $dados = mysqli_fetch_array($hasBattle);
+            $py1 = $dados['namePlayerOne'];
+            $py2 = $dados['namePlayerTwo'];
+            $idLuta = $dados['idFight'];
+        }else{
+            $py1 = "waiting player 1...";
+            $py2 = "waiting player 2...";
+            $idLuta = 'dead';
+        }
     }
-    
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,17 +85,18 @@
             ?>
                 <div class="botao inicio">New Player</div>
                 <div class="botao inicio">New Battle</div>
-                <div class="botao inicio">Next Round</div>
+                <div class="botao inicio btnRound">Next Round</div>
             <?php 
             }else{
             ?>
                 <div class="botao disabled">New Player</div>
                 <div class="botao disabled">New Battle</div>
-                <div class="botao inicio">Next Round</div>
+                <div class="botao inicio btnRound">Next Round</div>
             <?php } ?>
         </div>
 
         <h2>Current Fight</h2>
+        <h3>Current Round: <?=$_SESSION['round']?></h3>
         <div class="gaming">
             <div class="left-side">
                 <div class="side-up">
@@ -168,6 +168,11 @@
                     <button type="submit">Done</button>
                 </form>
             </div>
+        </section>
+        <section class="event-click">
+            <ul class="bloco-signup">
+                    
+            </ul>   
         </section>
         
         <script src="js/index.js"></script>
