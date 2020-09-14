@@ -7,6 +7,9 @@ body *, body{
     color: black;
     font-family: sans-serif;
 }
+body{
+    background-image: url('../img/background.jpg');
+}
 .container .firezard{
     height: 80vh;
     display: flex;
@@ -66,15 +69,15 @@ body *, body{
 }
 .main{
     width: 80%;
-    height: 100vh;
-    background-color: rgb(209, 209, 209);
+    background-color: rgb(255, 255, 255);
     margin: 0 auto;
 }
-h2{
+h2,h3{
     text-align: center;
     padding: 5px;
     color: rgba(2, 18, 43, 0.801);
     text-shadow: 1px 3px 3px rgba(2, 11, 27, 0.801);
+    width: 100%;
 }
 h3{
     text-align: center;
@@ -139,12 +142,39 @@ h3{
     cursor: pointer;
 } 
 .gaming .right-side .box-winner{
-    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.gaming .right-side .box-winner .waiting-result{
+    font-size: 2em;
+    color: rgba(14, 45, 92, 0.801);
+    margin-top: 30px;
+}
+.right-side .box-winner p{
+    width: 100%;
+    padding: 20px;
+    color: rgba(2, 18, 43, 0.801);
     display: flex;
     justify-content: center;
     align-items: center;
-    Color: rgba(2, 18, 43, 0.801);
-    font-size: 2.2em;
+    height: calc(330px/3);
+}
+.gaming .right-side .box-winner p:nth-child(1){
+    font-size: 1.6em;
+}
+.gaming .right-side .box-winner p:nth-child(2){
+    color: black;
+    font-weight: bolder;
+    font-size: 2.0em;
+    background-image: url('../img/fogos.jpg');
+    font-family: verdana;
+    background-position: center;
+    text-shadow: 1px 3px 1px rgba(114, 233, 103, 0.589);
+}
+.gaming .right-side .box-winner p:nth-child(3){
+    font-size: 1.4em;
+    text-align: center;
 }
 .gaming-next{
     display: flex;
@@ -160,9 +190,10 @@ h3{
 .gaming-next .next-player{
     width: calc(100%/3);
     text-align: center;
-    color: white;
-    text-shadow: 1px 1px 1px black;
-    background-color: rgb(145, 145, 145);
+    color: black;
+    font-weight: bold;
+    font-size: 1.1em;
+    background-color: rgba(4, 25, 56, 0.651);
     padding: 10px;
     border-radius: 200px;
 }
@@ -197,6 +228,9 @@ h3{
 }
 .check-database .winner-past{
     background-color: rgba(24, 194, 52, 0.726);
+}
+.check-database .waiting-past{
+    background-color: rgba(139, 139, 139, 0.726);
 }
 .event-click{
     width: 80%;

@@ -16,7 +16,7 @@
     if(isset($_POST['user']) || isset($_POST['password'])){
         $user = $_POST['user'];
         $password = $_POST['password'];
-        if($user!="gg" and $password!="123"){
+        if($user!="gg" || $password!="123"){
             $_SESSION['msg'] = "<p class='error'>Wrong person!</p>";
         }else{
             $_SESSION['admin'] = "goldraven";
@@ -34,12 +34,22 @@
                 mysqli_query($conn,$inserirRound);
                 $_SESSION['round'] = 1;
             }
+
+           
         }
     }
-   
-    //dia que eu to
-    //round que eu to
-
+    $hasBattle = mysqli_query($conn,"select * from Fight where alreadyFight='not' and round='".$_SESSION['round']."' and datee='".$_SESSION['dateHoje']."'");
+    if(mysqli_num_rows($hasBattle)>0){
+        $dados = mysqli_fetch_array($hasBattle);
+        $py1 = $dados['namePlayerOne'];
+        $py2 = $dados['namePlayerTwo'];
+        $idLuta = $dados['idFight'];
+    }else{
+        $py1 = "waiting player 1...";
+        $py2 = "waiting player 2...";
+        $idLuta = 'dead';
+    }
+    
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,46 +95,58 @@
                 <div class="botao inicio">Next Round</div>
             <?php } ?>
         </div>
+
         <h2>Current Fight</h2>
         <div class="gaming">
             <div class="left-side">
                 <div class="side-up">
-                   <p>Player I</p>
+                   <p class="btnFighter" id="<?=$idLuta?>"><?=$py1?></p>
                 </div>
                 <div class="side-down">
-                   <p>Player II</p>
+                   <p class="btnFighter"><?=$py2?></p>
                 </div>
             </div>
             <div class="right-side">
                 <div class="box-winner">
-                    Winner: <br>
-                    Player X
+                    <div class="waiting-result">Waiting battle result...</div>
                 </div>
             </div>
         </div>
+        
+
         <?php 
-        $rest = false;
-        if($rest){
+        $hasNext = mysqli_query($conn,"select * from Fight where alreadyFight='not' and round='".$_SESSION['round']."' and datee='".$_SESSION['dateHoje']."'");
+        $dbBase = [];
+        if(mysqli_num_rows($hasNext)>1){
+            while($dados = mysqli_fetch_array($hasNext)){
+                array_push($dbBase,$dados);
+            }
+            //var_dump($dbBase[1]);
+            $name1 = $dbBase[1]['namePlayerOne'];
+            $name2 = $dbBase[1]['namePlayerTwo'];
+        }else{
+            $name1 = "waiting more players";
+            $name2 = "waiting more players";
+        }
         ?>
         <h2>Next Fight</h2>
         <section class="gaming-next">
             <div class="next-player">
-                NextPlayer
+                <?=$name1?>
             </div>
             <div class="versus">
                 X
             </div>
             <div class="next-player">
-                NextPlayer
+                <?=$name2?>
             </div>
         </section>
-        <?php 
-        }
-        ?>
+       
         <h2>Information</h2>
         <div class="check-database">
             
         </div>
+
         <div class="botoes">
             <div class="botao final">Check all Rounds</div>
             <div class="botao final">Check all Players</div>
@@ -132,15 +154,19 @@
         </div>
         <section class="event-click">
             <div class="bloco-signup">
-                <input type="text" class="btnData" name="playerOne" placeholder="Player Name">
-                <input type="text" class="btnData" name="playerTwo" placeholder="Player Name">
-                <button type="submit">Done</button>
+                <form action="" method="POST" novalidate>
+                    <input type="text" class="btnData" name="playerOne" placeholder="Player Name">
+                    <input type="text" class="btnData" name="playerTwo" placeholder="Player Name">
+                    <button type="submit">Done</button>
+                </form>
             </div>
         </section>
         <section class="event-click">
             <div class="bloco-signup">
-                <input type="text" class="btnData" name="onePlayer" placeholder="Player Name">
-                <button type="submit">Done</button>
+                <form action="" method="POST" novalidate>
+                    <input type="text" class="btnData" name="onePlayer" placeholder="Player Name">
+                    <button type="submit">Done</button>
+                </form>
             </div>
         </section>
         
